@@ -52,5 +52,13 @@ namespace Microsoft.AspNetCore.Authentication
         /// Additional state values for the authentication session.
         /// </summary>
         public AuthenticationProperties Properties { get; private set; }
+
+        /// <summary>
+        /// Returns a copy of the ticket
+        /// </summary>
+        /// <returns>A copy of the ticket</returns>
+        public AuthenticationTicket Clone()
+            => new AuthenticationTicket(new ClaimsPrincipal(Principal), new AuthenticationProperties(Properties.Items, Properties.Parameters), AuthenticationScheme);
+
     }
 }
