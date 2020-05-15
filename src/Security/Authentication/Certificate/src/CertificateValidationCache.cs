@@ -25,7 +25,7 @@ namespace Microsoft.AspNetCore.Authentication.Certificate
         /// <summary>
         /// The expiration that should be used for entries in the MemoryCache, defaults to 30 minutes.
         /// </summary>
-        public TimeSpan CacheEntryExpiration { get; set; } = TimeSpan.FromMinutes(30);
+        public TimeSpan CacheEntryExpiration { get; set; } = TimeSpan.FromMinutes(2);
 
         /// <summary>
         /// How many validated certificate results to store in the cache, defaults to 1024.
@@ -50,7 +50,7 @@ namespace Microsoft.AspNetCore.Authentication.Certificate
         public void Put(HttpContext context, X509Certificate2 certificate, AuthenticateResult result)
             =>  _cache.Set(ComputeKey(context, certificate), result, new MemoryCacheEntryOptions().SetSize(1).SetSlidingExpiration(CacheEntryExpiration));
 
-        private string ComputeKey(HttpContext context, X509Certificate2 certificate)
+        private string ComputeKey(X509Certificate2 certificate)
             => $"{certificate.GetCertHashString(HashAlgorithmName.SHA256)}";
     }
 

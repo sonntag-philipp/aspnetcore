@@ -65,7 +65,7 @@ namespace Microsoft.AspNetCore.Authentication
                 return Success(Ticket.Clone());
             }
             // This shouldn't happen
-            return this;
+            throw new NotImplementedException();
         }
 
         /// <summary>
