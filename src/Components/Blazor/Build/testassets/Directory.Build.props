@@ -28,7 +28,7 @@
         IsImplicitlyDefined="true"
         ReferenceOutputAssembly="false"
         Condition="'$(UseRazorSdk)' == 'true'">
-        <SetTargetFramework>TargetFramework=netcoreapp5.0</SetTargetFramework>
+        <SetTargetFramework>TargetFramework=net5.0</SetTargetFramework>
       </ProjectReference>
     </ItemGroup>
 
