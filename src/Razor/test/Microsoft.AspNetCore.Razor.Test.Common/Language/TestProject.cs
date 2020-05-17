@@ -16,7 +16,7 @@ namespace Microsoft.AspNetCore.Razor.Language
             if (!Directory.Exists(projectDirectory) &&
                 string.Equals(assemblyName, "Microsoft.AspNetCore.Razor.Language.Test", StringComparison.Ordinal))
             {
-                projectDirectory = Path.Combine(repoRoot, "src", "Razor", "test", "RazorLanguage.Test");
+                projectDirectory = Path.Combine(repoRoot, "src", "Razor", "Microsoft.AspNetCore.Razor.Language", "test");
             }
 
             if (!Directory.Exists(projectDirectory))
