@@ -39,6 +39,7 @@
         DefaultNetCoreTargetFramework=$(DefaultNetCoreTargetFramework);
         RepoRoot=$(RepoRoot);
         Configuration=$(Configuration);
+        ArtifactsBinDir=$(ArtifactsBinDir);
       </PropsProperties>
     </PropertyGroup>
 
