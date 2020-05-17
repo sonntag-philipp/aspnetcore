@@ -12,7 +12,7 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             var repoRoot = SearchUp(AppContext.BaseDirectory, "global.json");
             var assemblyName = type.Assembly.GetName().Name;
-            var projectDirectory = Path.Combine(repoRoot, "src", "Razor", "test", assemblyName);
+            var projectDirectory = Path.Combine(repoRoot, "src", "Razor", assemblyName, "test");
             if (!Directory.Exists(projectDirectory) &&
                 string.Equals(assemblyName, "Microsoft.AspNetCore.Razor.Language.Test", StringComparison.Ordinal))
             {
