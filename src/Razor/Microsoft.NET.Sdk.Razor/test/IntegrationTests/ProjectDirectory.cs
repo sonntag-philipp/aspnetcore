@@ -41,7 +41,7 @@ namespace Microsoft.AspNetCore.Razor.Design.IntegrationTests
 
                 foreach (var project in new string[] { originalProjectName, }.Concat(additionalProjects))
                 {
-                    var testAppsRoot = Path.Combine(solutionRoot, "test", "testapps");
+                    var testAppsRoot = Path.Combine(solutionRoot, "test", "testassets");
                     var projectRoot = Path.Combine(testAppsRoot, project);
                     if (!Directory.Exists(projectRoot))
                     {
