@@ -11,9 +11,6 @@
 
     <!-- Tests do not work on Helix yet -->
     <BuildHelixPayload>false</BuildHelixPayload>
-
-    <!-- This is to ensure that the test can find the test project correctly -->
-    <AssemblyName>Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
