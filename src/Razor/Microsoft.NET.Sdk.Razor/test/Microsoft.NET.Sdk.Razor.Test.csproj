@@ -114,6 +114,10 @@ namespace Microsoft.AspNetCore.Razor.Design.IntegrationTests
 
   </Target>
 
+  <Target Name="RestoreTestProjects" BeforeTargets="Restore;Build" Condition="'$(DotNetBuildFromSource)' != 'true'">
+    <MSBuild Projects="..\..\test\testassets\RestoreTestProjects\RestoreTestProjects.csproj" Targets="Restore" Properties="MicrosoftNetCompilersToolsetPackageVersion=$(MicrosoftNetCompilersToolsetPackageVersion)" />
+  </Target>
+
   <Target Name="EnsureLogFolder" AfterTargets="Build">
     <MakeDir Directories="$([MSBuild]::NormalizeDirectory('$(ArtifactsDir)', 'log', '$(_BuildConfig)'))" />
   </Target>
