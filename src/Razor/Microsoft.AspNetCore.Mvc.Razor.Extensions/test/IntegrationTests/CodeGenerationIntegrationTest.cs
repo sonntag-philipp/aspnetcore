@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Xunit;
 
-namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.IntegrationTests
+namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
 {
     public class CodeGenerationIntegrationTest : IntegrationTestBase
     {

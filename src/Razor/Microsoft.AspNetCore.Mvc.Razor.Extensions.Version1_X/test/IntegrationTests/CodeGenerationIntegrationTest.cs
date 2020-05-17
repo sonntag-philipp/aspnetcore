@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.CodeAnalysis.CSharp;
 using Xunit;
 
-namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X.IntegrationTests
+namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
 {
     public class CodeGenerationIntegrationTest : IntegrationTestBase
     {
@@ -311,7 +311,7 @@ public class ThisShouldBeGenerated
             var diagnotics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
             Assert.Equal("RZ2001", Assert.Single(diagnotics).Id);
         }
-        
+
         [Fact]
         public void ModelExpressionTagHelper_DesignTime()
         {
