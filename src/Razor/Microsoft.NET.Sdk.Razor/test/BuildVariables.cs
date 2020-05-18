@@ -6,8 +6,10 @@ namespace Microsoft.AspNetCore.Razor.Design.IntegrationTests
     internal static partial class BuildVariables
     {
         private static string _msBuildPath = string.Empty;
-        private static string _MicrosoftNETCoreApp50PackageVersion = string.Empty;
+        private static string _MicrosoftNETCoreAppRuntimeVersion = string.Empty;
         private static string _microsoftNetCompilersToolsetPackageVersion = string.Empty;
+        private static string _RazorSdkDirectoryRoot = string.Empty;
+        private static string _RepoRoot = string.Empty;
 
         static partial void InitializeVariables();
 
@@ -20,12 +22,12 @@ namespace Microsoft.AspNetCore.Razor.Design.IntegrationTests
             }
         }
 
-        public static string MicrosoftNETCoreApp50PackageVersion
+        public static string MicrosoftNETCoreAppRuntimeVersion
         {
             get
             {
                 InitializeVariables();
-                return _MicrosoftNETCoreApp50PackageVersion;
+                return _MicrosoftNETCoreAppRuntimeVersion;
             }
         }
 
@@ -35,6 +37,24 @@ namespace Microsoft.AspNetCore.Razor.Design.IntegrationTests
             {
                 InitializeVariables();
                 return _microsoftNetCompilersToolsetPackageVersion;
+            }
+        }
+
+        public static string RazorSdkDirectoryRoot
+        {
+            get
+            {
+                InitializeVariables();
+                return _RazorSdkDirectoryRoot;
+            }
+        }
+
+        public static string RepoRoot
+        {
+            get
+            {
+                InitializeVariables();
+                return _RepoRoot;
             }
         }
     }

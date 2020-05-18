@@ -92,8 +92,10 @@ namespace Microsoft.AspNetCore.Razor.Design.IntegrationTests
         static partial void InitializeVariables()
         {
             _msBuildPath = @"$(_DesktopMSBuildPath)";
-            _MicrosoftNETCoreApp50PackageVersion = "$(MicrosoftNETCoreApp50PackageVersion)";
+            _MicrosoftNETCoreAppRuntimeVersion = "$(MicrosoftNETCoreAppRuntimeVersion)";
             _microsoftNetCompilersToolsetPackageVersion = "$(MicrosoftNetCompilersToolsetPackageVersion)";
+            _RazorSdkDirectoryRoot = @"$(ArtifactsBinDir)Microsoft.NET.Sdk.Razor\$(Configuration)\sdk-output\";
+            _RepoRoot = @"$(RepoRoot)";
         }
     }
 }
@@ -115,7 +117,7 @@ namespace Microsoft.AspNetCore.Razor.Design.IntegrationTests
   </Target>
 
   <Target Name="RestoreTestProjects" BeforeTargets="Restore;Build" Condition="'$(DotNetBuildFromSource)' != 'true'">
-    <MSBuild Projects="..\..\test\testassets\RestoreTestProjects\RestoreTestProjects.csproj" Targets="Restore" Properties="MicrosoftNetCompilersToolsetPackageVersion=$(MicrosoftNetCompilersToolsetPackageVersion)" />
+    <MSBuild Projects="..\..\test\testassets\RestoreTestProjects\RestoreTestProjects.csproj" Targets="Restore" Properties="MicrosoftNetCompilersToolsetPackageVersion=$(MicrosoftNetCompilersToolsetPackageVersion);RepoRoot=$(RepoRoot)" />
   </Target>
 
   <Target Name="EnsureLogFolder" AfterTargets="Build">
