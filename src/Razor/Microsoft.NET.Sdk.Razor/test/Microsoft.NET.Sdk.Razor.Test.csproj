@@ -71,7 +71,7 @@
   <!-- Only run this target if we are actually testing. Skip if we are building only. -->
   <Target
     Name="GenerateMSBuildLocationFile"
-    Condition="'$(TargetFramework)'!='' AND '$(Test)' == 'true'"
+    Condition="'$(Test)' == 'true'"
     AfterTargets="BeforeBuild"
     Inputs="$(MSBuildAllProjects)"
     Outputs="$(MSBuildLocationFileOutput)">
