@@ -127,7 +127,7 @@ This package is an internal implementation of the .NET Core SDK and is not meant
 
     <Reference Include="microsoft.netcore.app.runtime.$(RuntimeIdentifier)" ExcludeAssets="All" PrivateAssets="All" />
 
-    <ProjectReference Condition=" '$(BuildIisNativeProjects)' == 'true' "
+    <ProjectReference Condition=" '$(BuildIisNativeProjects)' == 'true' AND $(BuildNative) "
         Include="$(RepoRoot)src\Servers\IIS\AspNetCoreModuleV2\InProcessRequestHandler\InProcessRequestHandler.vcxproj">
       <SetPlatform>Platform=$(TargetArchitecture)</SetPlatform>
       <SetPlatform Condition="'$(TargetArchitecture)' == 'x86'">Platform=Win32</SetPlatform>
@@ -138,6 +138,12 @@ This package is an internal implementation of the .NET Core SDK and is not meant
       <!-- C++ projects don't invoke GetTargetPath by default when building. -->
       <Targets>Build;GetTargetPath</Targets>
     </ProjectReference>
+
+    <!-- Complicated condition here covers cases where native builds are separate but in-proc handler is needed. -->
+    <_ResolvedNativeProjectReferencePaths Condition="('$(BuildIisNativeProjects)' != 'true' OR '$(BuildNative)' == 'false' OR '$(VCTargetsPath)' == '') AND '$(TargetOsName)' == 'win' AND ('$(TargetArchitecture)' == 'x86' OR '$(TargetArchitecture)' == 'x64')"
+        Include="$(ArtifactsBinDir)InProcessRequestHandler\$(TargetArchitecture)\$(Configuration)\aspnetcorev2_inprocess.dll">
+      <IsNativeImage>true</IsNativeImage>
+    </_ResolvedNativeProjectReferencePaths>
   </ItemGroup>
 
   <ItemGroup>
