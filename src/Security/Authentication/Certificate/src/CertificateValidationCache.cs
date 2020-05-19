@@ -41,7 +41,7 @@ namespace Microsoft.AspNetCore.Authentication.Certificate
         public AuthenticateResult Get(HttpContext context, X509Certificate2 certificate)
         {
             var result = _cache.Get(ComputeKey(certificate)) as AuthenticateResult;
-            return result ?? result.Clone();
+            return result?.Clone();
         }
 
         /// <summary>
