@@ -21,7 +21,6 @@ namespace Microsoft.AspNetCore.Authentication.Certificate
              _cache = new MemoryCache(new MemoryCacheOptions { SizeLimit = CacheSize });
         }
 
-
         /// <summary>
         /// The expiration that should be used for entries in the MemoryCache, defaults to 2 minutes.
         /// </summary>
