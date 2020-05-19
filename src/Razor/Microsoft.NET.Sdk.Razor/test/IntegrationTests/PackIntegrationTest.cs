@@ -184,7 +184,7 @@ namespace Microsoft.AspNetCore.Razor.Design.IntegrationTests
         [InitializeTestProject("PackageLibraryDirectDependency", additionalProjects: new[] { "PackageLibraryTransitiveDependency" })]
         public async Task Pack_IncludesStaticWebAssets()
         {
-            var result = await DotnetMSBuild("Pack");
+            var result = await DotnetMSBuild("Restore /t:Pack");
 
             Assert.BuildPassed(result, allowWarnings: true);
 
@@ -208,7 +208,7 @@ namespace Microsoft.AspNetCore.Razor.Design.IntegrationTests
         [InitializeTestProject("PackageLibraryDirectDependency", additionalProjects: new[] { "PackageLibraryTransitiveDependency" })]
         public async Task Pack_StaticWebAssetsEnabledFalse_DoesNotPackAnyStaticWebAssets()
         {
-            var result = await DotnetMSBuild("Pack", "/p:StaticWebAssetsEnabled=false");
+            var result = await DotnetMSBuild("Restore /t:Pack", "/p:StaticWebAssetsEnabled=false");
 
             Assert.BuildPassed(result, allowWarnings: true);
 
@@ -232,7 +232,7 @@ namespace Microsoft.AspNetCore.Razor.Design.IntegrationTests
         [InitializeTestProject("PackageLibraryDirectDependency", additionalProjects: new[] { "PackageLibraryTransitiveDependency" })]
         public async Task Pack_NoBuild_IncludesStaticWebAssets()
         {
-            var result = await DotnetMSBuild("Build");
+            var result = await DotnetMSBuild("Restore /t:Build");
             Assert.BuildPassed(result, allowWarnings: true);
 
             var pack = await DotnetMSBuild("Pack", "/p:NoBuild=true");
@@ -283,7 +283,7 @@ namespace Microsoft.AspNetCore.Razor.Design.IntegrationTests
         public async Task Pack_Incremental_DoesNotRegenerateCacheAndPropsFiles()
         {
             TargetFramework = "netstandard2.0";
-            var result = await DotnetMSBuild("Pack");
+            var result = await DotnetMSBuild("Restore /t:Pack");
 
             Assert.BuildPassed(result, allowWarnings: true);
 
