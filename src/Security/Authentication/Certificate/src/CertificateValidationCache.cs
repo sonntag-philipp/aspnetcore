@@ -23,7 +23,7 @@ namespace Microsoft.AspNetCore.Authentication.Certificate
 
 
         /// <summary>
-        /// The expiration that should be used for entries in the MemoryCache, defaults to 30 minutes.
+        /// The expiration that should be used for entries in the MemoryCache, defaults to 2 minutes.
         /// </summary>
         public TimeSpan CacheEntryExpiration { get; set; } = TimeSpan.FromMinutes(2);
 
