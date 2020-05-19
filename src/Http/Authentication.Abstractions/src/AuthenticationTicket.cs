@@ -58,6 +58,13 @@ namespace Microsoft.AspNetCore.Authentication
         /// </summary>
         /// <returns>A copy of the ticket</returns>
         public AuthenticationTicket Clone()
-            => new AuthenticationTicket(Principal.Clone(), Properties.Clone(), AuthenticationScheme);
+        {
+            var principal = new ClaimsPrincipal();
+            foreach (var identity in Principal.Identities)
+            {
+                principal.AddIdentity(identity.Clone());
+            }
+            return new AuthenticationTicket(principal, Properties.Clone(), AuthenticationScheme);
+        }
     }
 }

@@ -58,7 +58,7 @@ namespace Microsoft.AspNetCore.Authentication
             }
             if (Failure != null)
             {
-                return Fail(Failure, Properties);
+                return Fail(Failure, Properties.Clone());
             }
             if (Succeeded)
             {
