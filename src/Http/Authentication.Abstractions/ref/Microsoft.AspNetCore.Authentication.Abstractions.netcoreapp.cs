@@ -11,8 +11,8 @@ namespace Microsoft.AspNetCore.Authentication
         public System.Security.Claims.ClaimsPrincipal Principal { get { throw null; } }
         public Microsoft.AspNetCore.Authentication.AuthenticationProperties Properties { [System.Runtime.CompilerServices.CompilerGeneratedAttribute] get { throw null; } [System.Runtime.CompilerServices.CompilerGeneratedAttribute] protected set { } }
         public bool Succeeded { get { throw null; } }
-        public Microsoft.AspNetCore.Authentication.AuthenticateResult Clone() { throw null; }
         public Microsoft.AspNetCore.Authentication.AuthenticationTicket Ticket { [System.Runtime.CompilerServices.CompilerGeneratedAttribute] get { throw null; } [System.Runtime.CompilerServices.CompilerGeneratedAttribute] protected set { } }
+        public Microsoft.AspNetCore.Authentication.AuthenticateResult Clone() { throw null; }
         public static Microsoft.AspNetCore.Authentication.AuthenticateResult Fail(System.Exception failure) { throw null; }
         public static Microsoft.AspNetCore.Authentication.AuthenticateResult Fail(System.Exception failure, Microsoft.AspNetCore.Authentication.AuthenticationProperties properties) { throw null; }
         public static Microsoft.AspNetCore.Authentication.AuthenticateResult Fail(string failureMessage) { throw null; }
