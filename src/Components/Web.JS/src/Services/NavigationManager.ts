@@ -10,8 +10,9 @@ let fakeLocation = {
   href: document.location.origin 
 }
 
-let fakeBaseURI = fakeLocation.href;
-
+if (document.location.href !== (document.location.origin + "/")) {
+  document.location.href = document.location.origin + "/";
+}
 
 
 
@@ -24,7 +25,7 @@ export const internalFunctions = {
   listenForNavigationEvents,
   enableNavigationInterception,
   navigateTo,
-  getBaseURI: () => fakeBaseURI,
+  getBaseURI: () => document.baseURI,
   getLocationHref: () => fakeLocation.href,
 };
 
@@ -35,8 +36,10 @@ function listenForNavigationEvents(callback: (uri: string, intercepted: boolean)
     return;
   }
 
-  hasRegisteredNavigationEventListeners = true;
-  window.addEventListener('popstate', () => notifyLocationChanged(false));
+  hasRegisteredNavigationEventListeners = true; 
+  window.addEventListener('popstate', (event) => {
+    notifyLocationChanged(false);
+  });
 }
 
 function enableNavigationInterception() {
@@ -88,17 +91,20 @@ export function navigateTo(uri: string, forceLoad: boolean) {
 
   if (!forceLoad && isWithinBaseUriSpace(absoluteUri)) {
     // It's an internal URL, so do client-side navigation
+    console.log("Internal navigation -> Don't reload site.");
     performInternalNavigation(absoluteUri, false);
-  } else if (forceLoad && location.href === uri) {
+  } else if (forceLoad && fakeLocation.href === uri) {
     // Force-loading the same URL you're already on requires special handling to avoid
     // triggering browser-specific behavior issues.
     // For details about what this fixes and why, see https://github.com/dotnet/aspnetcore/pull/10839
+    console.log("Forced navigation on same site -> Reload site.");
     const temporaryUri = uri + '?';
-    history.replaceState(null, '', temporaryUri);
-    location.replace(uri);
+    //history.replaceState(null, '', temporaryUri);
+    //location.replace(uri);
   } else {
+    console.log("External or forced navigation on different site -> Reload site.");
     // It's either an external URL, or forceLoad is requested, so do a full page load
-    location.href = uri;
+    // location.href = uri;
   }
 }
 
@@ -111,7 +117,7 @@ function performInternalNavigation(absoluteInternalHref: string, interceptedLink
   resetScrollAfterNextBatch();
 
   fakeLocation.href = absoluteInternalHref;
-  // history.pushState(null, /* ignored title */ '', absoluteInternalHref);
+  history.pushState(null, /* ignored title */ '');
   notifyLocationChanged(interceptedLink);
 }
 
