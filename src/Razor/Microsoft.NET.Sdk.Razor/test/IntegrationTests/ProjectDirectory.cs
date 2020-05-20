@@ -51,7 +51,7 @@ namespace Microsoft.AspNetCore.Razor.Design.IntegrationTests
                     var projectDestination = Path.Combine(destinationPath, project);
                     var projectDestinationDir = Directory.CreateDirectory(projectDestination);
                     CopyDirectory(new DirectoryInfo(projectRoot), projectDestinationDir);
-                    SetupDirectoryBuildFiles(solutionRoot, binariesRoot, testAppsRoot, projectDestination);
+                    SetupDirectoryBuildFiles(repositoryRoot, binariesRoot, testAppsRoot, projectDestination);
                 }
 
                 // Rename the csproj/fsproj
@@ -120,12 +120,12 @@ namespace Microsoft.AspNetCore.Razor.Design.IntegrationTests
                 }
             }
 
-            void SetupDirectoryBuildFiles(string solutionRoot, string binariesRoot, string testAppsRoot, string projectDestination)
+            void SetupDirectoryBuildFiles(string repoRoot, string binariesRoot, string testAppsRoot, string projectDestination)
             {
                 var beforeDirectoryPropsContent =
 $@"<Project>
   <PropertyGroup>
-    <SolutionRoot>{solutionRoot}</SolutionRoot>
+    <RepoRoot>{repoRoot}</RepoRoot>
     <BinariesRoot>{binariesRoot}</BinariesRoot>
   </PropertyGroup>
 </Project>";
