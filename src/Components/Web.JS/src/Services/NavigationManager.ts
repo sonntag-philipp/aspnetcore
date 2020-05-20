@@ -5,6 +5,17 @@ import { EventDelegator } from '../Rendering/EventDelegator';
 let hasEnabledNavigationInterception = false;
 let hasRegisteredNavigationEventListeners = false;
 
+// Implemented variables to disabled client side routes
+let fakeLocation = {
+  href: document.location.origin 
+}
+
+let fakeBaseURI = fakeLocation.href;
+
+
+
+
+
 // Will be initialized once someone registers
 let notifyLocationChangedCallback: ((uri: string, intercepted: boolean) => Promise<void>) | null = null;
 
@@ -13,8 +24,8 @@ export const internalFunctions = {
   listenForNavigationEvents,
   enableNavigationInterception,
   navigateTo,
-  getBaseURI: () => document.baseURI,
-  getLocationHref: () => location.href,
+  getBaseURI: () => fakeBaseURI,
+  getLocationHref: () => fakeLocation.href,
 };
 
 function listenForNavigationEvents(callback: (uri: string, intercepted: boolean) => Promise<void>) {
@@ -99,13 +110,14 @@ function performInternalNavigation(absoluteInternalHref: string, interceptedLink
   // we render the new page. As a best approximation, wait until the next batch.
   resetScrollAfterNextBatch();
 
-  history.pushState(null, /* ignored title */ '', absoluteInternalHref);
+  fakeLocation.href = absoluteInternalHref;
+  // history.pushState(null, /* ignored title */ '', absoluteInternalHref);
   notifyLocationChanged(interceptedLink);
 }
 
 async function notifyLocationChanged(interceptedLink: boolean) {
   if (notifyLocationChangedCallback) {
-    await notifyLocationChangedCallback(location.href, interceptedLink);
+    await notifyLocationChangedCallback(fakeLocation.href, interceptedLink);
   }
 }
 
